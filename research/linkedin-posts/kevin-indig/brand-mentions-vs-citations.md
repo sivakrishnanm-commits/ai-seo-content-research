@@ -1,6 +1,6 @@
 ---
 author: Kevin Indig
-url: https://www.linkedin.com/posts/kevinindig_the-seo-job-market-has-quietly-repriced-itself-activity-7454488282047913985-qZg7?utm_source=share&utm_medium=member_desktop&rcm=ACoAACRImngBzYt5MemdmK04bMCCxmAPBWNe2XU
+url: https://www.linkedin.com/posts/kevinindig_you-might-have-noticed-that-ai-models-do-activity-7453027466018869249-RULD?utm_source=share&utm_medium=member_desktop&rcm=ACoAACRImngBzYt5MemdmK04bMCCxmAPBWNe2XU
 source_type: linkedin_post
 topic: Recognized brands get named in AI outputs; publishers get cited but not named
 engagement: 39 reactions, 12 comments
