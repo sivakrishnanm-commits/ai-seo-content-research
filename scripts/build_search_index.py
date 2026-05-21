@@ -8,12 +8,12 @@ import sys
 import pickle
 from pathlib import Path
 import numpy as np
-from sentence_transformers import SentenceTransformer
+from sklearn.feature_extraction.text import TfidfVectorizer
+from sklearn.metrics.pairwise import cosine_similarity
 
 INDEX_DIR = Path(".embeddings")
 INDEX_DIR.mkdir(exist_ok=True)
 INDEX_PATH = INDEX_DIR / "corpus.pkl"
-MODEL_NAME = "sentence-transformers/all-MiniLM-L6-v2"
 
 def load_corpus():
     docs = []
@@ -31,27 +31,31 @@ def load_corpus():
     return docs
 
 def build_index():
-    print("Loading model...")
-    model = SentenceTransformer(MODEL_NAME)
+    print("Fitting TF-IDF vectorizer...")
     docs = load_corpus()
-    print(f"Embedding {len(docs)} chunks...")
     texts = [d["text"] for d in docs]
-    embeddings = model.encode(texts, show_progress_bar=True, convert_to_numpy=True)
+    vectorizer = TfidfVectorizer(
+        sublinear_tf=True,
+        max_df=0.85,
+        min_df=1,
+        ngram_range=(1, 2),
+        max_features=50000,
+    )
+    embeddings = vectorizer.fit_transform(texts).toarray().astype(np.float32)
+    print(f"Embedding {len(docs)} chunks...")
     with open(INDEX_PATH, "wb") as f:
-        pickle.dump({"docs": docs, "embeddings": embeddings}, f)
+        pickle.dump({"docs": docs, "embeddings": embeddings, "vectorizer": vectorizer}, f)
     print(f"✅ Index built: {len(docs)} chunks → {INDEX_PATH}")
 
 def search(query: str, k: int = 5):
     if not INDEX_PATH.exists():
         print("No index yet. Run without query first.")
         return
-    model = SentenceTransformer(MODEL_NAME)
     with open(INDEX_PATH, "rb") as f:
         data = pickle.load(f)
-    q_emb = model.encode([query], convert_to_numpy=True)[0]
-    sims = data["embeddings"] @ q_emb / (
-        np.linalg.norm(data["embeddings"], axis=1) * np.linalg.norm(q_emb) + 1e-9
-    )
+    vectorizer = data["vectorizer"]
+    q_emb = vectorizer.transform([query]).toarray().astype(np.float32)
+    sims = cosine_similarity(q_emb, data["embeddings"])[0]
     top = np.argsort(-sims)[:k]
     print(f"\n🔎 Top {k} matches for: {query!r}\n")
     for rank, idx in enumerate(top, 1):
