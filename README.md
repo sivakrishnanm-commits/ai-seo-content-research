@@ -14,6 +14,7 @@ ai-seo-content-research/
 │   ├── youtube-transcripts/     # Raw and cleaned YouTube transcripts
 │   └── other/                   # Miscellaneous research materials
 └── scripts/
+    ├── download-transcripts.sh  # Download transcripts from configured sources
     ├── fetch_youtube.sh         # Download YouTube transcripts via yt-dlp
     ├── clean_transcripts.py     # Normalize and clean raw transcripts
     └── build_search_index.py    # Build a local full-text search index
