@@ -37,32 +37,34 @@ The 10 span six strategic lenses on purpose:
 Full rationale, channels, and collection plan in [`research/sources.md`](research/sources.md).
 
 ## Repository structure
-Research/
-├── research/
-│   ├── sources.md                  ← 10 experts with rationale + channels
-│   ├── synthesis.md                ← synthesized insights and findings
-│   ├── ANNOTATION_TEMPLATE.md      ← annotation framework
-│   ├── linkedin-posts/             ← 30+ posts, all annotated
-│   │   ├── kevin-indig/
-│   │   ├── eli-schwartz/
-│   │   ├── aleyda-solis/
-│   │   ├── bernard-huang/
-│   │   ├── michael-king/
-│   │   ├── ross-hudgens/
-│   │   ├── andrew-holland/
-│   │   ├── alex-birkett/
-│   │   ├── tim-soulo/
-│   │   └── tom-critchlow/
-│   ├── youtube-transcripts/        ← cleaned transcripts by author
-│   └── other/
-│       ├── links.md                ← newsletters, books, tools, podcasts
-│       ├── search-examples.md      ← example semantic search outputs
-│       └── *.pdf                   ← original research (Omniscient)
-└── scripts/
+
+```
+research/
+├── sources.md                  ← 10 experts with rationale + channels
+├── synthesis.md                ← synthesized insights and findings
+├── ANNOTATION_TEMPLATE.md      ← annotation framework
+├── linkedin-posts/             ← 30+ posts, all annotated
+│   ├── kevin-indig/
+│   ├── eli-schwartz/
+│   ├── aleyda-solis/
+│   ├── bernard-huang/
+│   ├── michael-king/
+│   ├── ross-hudgens/
+│   ├── andrew-holland/
+│   ├── alex-birkett/
+│   ├── tim-soulo/
+│   └── tom-critchlow/
+├── youtube-transcripts/        ← cleaned transcripts by author
+└── other/
+    ├── links.md                ← newsletters, books, tools, podcasts
+    ├── search-examples.md      ← example semantic search outputs
+    └── *.pdf                   ← original research (Omniscient)
+scripts/
 ├── download-transcripts.sh     ← batch fetch from configured sources
 ├── fetch_youtube.sh            ← yt-dlp wrapper for captions
 ├── clean_transcripts.py        ← SRT → clean Markdown
 └── build_search_index.py       ← semantic search over the corpus
+```
 
 ## What's collected
 
